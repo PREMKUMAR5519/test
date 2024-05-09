@@ -3,9 +3,8 @@ const router = express.Router();
 const multer = require('multer');
 const Employee = require("../models/Employee")
 
-///images
 
-// Multer setup for image upload
+// for image upload
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -17,7 +16,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Endpoint to handle form submission and image upload
+// Post   //upload  ("images")
 router.post('/upload', upload.single('image'), (req, res) => {
   const { name, email, age, designation, gender, mobileNumber } = req.body;
   const imagePath = req.file.path;
@@ -26,14 +25,14 @@ router.post('/upload', upload.single('image'), (req, res) => {
     .then(() => res.send('Employee Added Sucessfully'))
     .catch(err => res.status(400).send(err));
 });
-// Endpoint to get all users
+// get //employee (all employee details)
 router.get('/employee', (req, res) => {
   Employee.find()
     .then(employee => res.json(employee))
     .catch(err => res.status(400).send(err));
 });
 
-// Endpoint to get user by ID
+// get  //employeee/:id (get particular employee id)
 router.get('/employee/:id', (req, res) => {
   const employeeId = req.params.id;
   Employee.findById(employeeId)

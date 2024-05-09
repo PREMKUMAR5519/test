@@ -13,12 +13,12 @@ const app = express()
 app.use('/uploads', express.static('uploads'));
 
 app.use(express.json())//
-const connectDB = async()=>{//mongodb+srv://prem551969:Prem551969@fitnessapp.tomgeha.mongodb.net/?retryWrites=true&w=majority
-    await mongoose.connect("mongodb://localhost:27017/newbase",{
+const connectDB = async()=>{
+    await mongoose.connect("mongodb+srv://prem551969:Prem551969@fitnessapp.tomgeha.mongodb.net/?retryWrites=true&w=majority",{
         useNewUrlParser: true,
         useUnifiedTopology:true
     });
-    console.log("connected to mongoDB")
+    console.log("connected to mongoDB Atlas")
 };
 connectDB()
 app.use(cors())
