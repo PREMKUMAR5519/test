@@ -12,9 +12,9 @@ require("dotenv").config()
 const app = express()
 app.use('/uploads', express.static('uploads'));
 
-app.use(express.json())//mongodb+srv://prem551969:Prem551969@fitnessapp.tomgeha.mongodb.net/?retryWrites=true&w=majority
+app.use(express.json())//
 const connectDB = async()=>{
-    await mongoose.connect("mongodb://localhost:27017/employeeDB",{
+    await mongoose.connect("mongodb+srv://prem551969:Prem551969@fitnessapp.tomgeha.mongodb.net/?retryWrites=true&w=majority",{
         useNewUrlParser: true,
         useUnifiedTopology:true
     });
