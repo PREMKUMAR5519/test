@@ -13,8 +13,8 @@ const app = express()
 app.use('/uploads', express.static('uploads'));
 
 app.use(express.json())//
-const connectDB = async()=>{
-    await mongoose.connect("mongodb+srv://prem551969:Prem551969@fitnessapp.tomgeha.mongodb.net/?retryWrites=true&w=majority",{
+const connectDB = async()=>{//mongodb+srv://prem551969:Prem551969@fitnessapp.tomgeha.mongodb.net/?retryWrites=true&w=majority
+    await mongoose.connect("mongodb://localhost:27017/newbase",{
         useNewUrlParser: true,
         useUnifiedTopology:true
     });

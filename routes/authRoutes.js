@@ -4,17 +4,18 @@ const jwt = require("jsonwebtoken")
 const router = express.Router()
 const User = require("../models/User")
 
+
 // PoST /auth/register
 router.post("/register", async (req, res)=>{
-    const {username,password}=req.body
+    const {name,password}=req.body
 
     try {
-        let user = await User.findOne({username})
+        let user = await User.findOne({name})
         if (user){
-            return res.status(400).json({msg:"username already exists"})
+            return res.status(400).json({msg:"user already exists"})
         }
         user = new User ({
-            username,
+            name,
             password
         })
         await user.save()
@@ -24,13 +25,14 @@ router.post("/register", async (req, res)=>{
         res.status(500).send("server error")
         
     }
-})// post/auth/login
+})
+// post/auth/login
 
 router.post("/login", async (req, res)=>{
-    const {username,password}=req.body
+    const {name,password}=req.body
 
     try {
-        let user = await User.findOne({username})
+        let user = await User.findOne({name})
         if (!user){
             return res.status(400).json({msg:"Invalid user"})
         } 
@@ -43,7 +45,7 @@ router.post("/login", async (req, res)=>{
         const payload = {
             user:{
                 id: user._id,
-                username:user.username,
+                username:user.name,
             }
         }
         jwt.sign(payload,process.env.JWT_SECRET,{expiresIn:'1h'},(err, tokken)=>{
@@ -57,4 +59,11 @@ router.post("/login", async (req, res)=>{
         
     }
 })
+// GET /auth/logout
+router.get('/logout', (req, res)=>{
+    res.json({msg: 'user loggedout sucessfully'})
+})
+
+
+
 module.exports = router
